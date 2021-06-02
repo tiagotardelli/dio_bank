@@ -1,0 +1,13 @@
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.exe
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.deps.json
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.runtimeconfig.json
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.runtimeconfig.dev.json
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.dll
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\bin\Debug\netcoreapp3.1\dio_Bank.pdb
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.csprojAssemblyReference.cache
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.AssemblyInfoInputs.cache
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.AssemblyInfo.cs
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.csproj.CoreCompileInputs.cache
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.dll
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.pdb
+E:\OneDrive\Tardelli\Estudos\Projetos\DIO\dio_Bank\obj\Debug\netcoreapp3.1\dio_Bank.genruntimeconfig.cache
