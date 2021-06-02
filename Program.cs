@@ -7,16 +7,16 @@ namespace dio_Bank
     class Program
     {
 
-        static List<Conta> lista_contas = new List<Conta>();
+        static List<Conta> listContas = new List<Conta>();
 
         static void Main(string[] args)
         {
-         string opcao_usuario = ObterOpcaoUsuario();
+         string opcaoUsuario = ObterOpcaoUsuario();
 
-           while (opcao_usuario.ToUpper() != "X")
+           while (opcaoUsuario.ToUpper() != "X")
            {
                 
-                switch (opcao_usuario)
+                switch (opcaoUsuario)
                 {
                         case "1":
                             ListarContas();
@@ -39,22 +39,73 @@ namespace dio_Bank
                     default:
                             throw new ArgumentOutOfRangeException();
                 }
-                opcao_usuario = ObterOpcaoUsuario();
+                opcaoUsuario = ObterOpcaoUsuario();
            }
         }
 
         private static void Transferir()
         {
-            Console.WriteLine("Digite o número da conta de origem: ");
-            int indice_conta_origem = int.Parse(Console.ReadLine());
+            int entradaContaOrigem = 0, entradaContaDestino = 0;
+            double entradaValorTransferencia = 0.0;
+            
 
-            Console.WriteLine("Digite o número da conta de destino: !");
-            int indice_conta_destino = int.Parse(Console.ReadLine());
+            if(listContas.Count == 0)
+            {
+                Console.WriteLine("Não existem contas cadastradas!");
+                return; 
+            }
+            else if(listContas.Count == 1)
+            {
+                 Console.WriteLine("Existe somente uma conta cadastrada!");
+                return;
+            } 
 
-            Console.WriteLine("Digite o valor a ser transmitido: !");
-            int valor_transferencia = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.WriteLine("Digite o número da conta de origem: ");
+                entradaContaOrigem = int.Parse(Console.ReadLine());
 
-            lista_contas[indice_conta_origem].Transferir(valor_transferencia, lista_contas[indice_conta_destino]);
+                if(int.TryParse(Console.ReadLine(), out int indiceContaOrigem) 
+                    && (indiceContaOrigem >= 0 && indiceContaOrigem <= listContas.Count))
+                {
+                    entradaContaOrigem = indiceContaOrigem;
+                    break;
+                }
+                else
+                {
+                     Console.WriteLine("Número da conta inválido!!!!!");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Digite o número da conta de destino: !");
+
+                if(int.TryParse(Console.ReadLine(), out int indiceContaDestino) 
+                    && (indiceContaDestino >= 0 && indiceContaDestino <= listContas.Count))
+                {
+                    entradaContaOrigem = indiceContaDestino;
+                    break;
+                }
+                else
+                {
+                     Console.WriteLine("Número da conta inválido!!!!!");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Digite o valor a ser transmitido: !");
+                
+                if(double.TryParse(Console.ReadLine(), out double valorTransferencia))
+                {
+                    entradaValorTransferencia = valorTransferencia;
+                    break;
+                }
+        
+            }
+
+            listContas[entradaContaOrigem].Transferir(entradaValorTransferencia, listContas[entradaContaDestino]);
         }
 
         private static void Depositar()
@@ -62,14 +113,15 @@ namespace dio_Bank
             int entrada_conta = 0;
             double entrada_deposito = 0.0;
 
-            if(lista_contas.Count == 0)
+            if(listContas.Count == 0)
             {
                 Console.WriteLine("Não existem contas cadastradas!");
                 return; 
             }
+
             Console.WriteLine("Digite o número da conta: ");
             if(int.TryParse(Console.ReadLine(), out int numero_conta) 
-                    && (numero_conta >= 0 && numero_conta <= lista_contas.Count))
+                    && (numero_conta >= 0 && numero_conta <= listContas.Count))
              {
                  entrada_conta = numero_conta;
              }
@@ -80,9 +132,9 @@ namespace dio_Bank
              }
 
              Console.WriteLine("Digite o valor do Saque: ");
-             if(double.TryParse(Console.ReadLine(), out double valor_deposito))
+             if(double.TryParse(Console.ReadLine(), out double valorDeposito))
              {
-                 entrada_deposito = valor_deposito;
+                 entrada_deposito = valorDeposito;
              }
              else
              {
@@ -91,60 +143,65 @@ namespace dio_Bank
              }
 
 
-            lista_contas[entrada_conta].Depositar(entrada_deposito);
+            listContas[entrada_conta].Depositar(entrada_deposito);
         }
 
         private static void Sacar()
         {
-            bool validado = false;
-            int entrada_conta = 0;
-            double entrada_saque = 0.0;
 
-            if(lista_contas.Count == 0)
+            int entradaConta = 0;
+            double entradaSaque = 0.0;
+
+            if(listContas.Count == 0)
             {
                 Console.WriteLine("Não existem contas cadastradas!");
                 return; 
             }
 
+            while (true)
+            {
                 Console.WriteLine("Digite o número da conta: ");
-                if(int.TryParse(Console.ReadLine(), out int numero_conta) 
-                    && (numero_conta >= 0 && numero_conta <= lista_contas.Count))
+                 if(int.TryParse(Console.ReadLine(), out int numeroConta) 
+                    && (numeroConta >= 0 && numeroConta <= listContas.Count))
                 {
-                    entrada_conta = numero_conta;
+                    entradaConta = numeroConta;
+                    break;
                 }
                 else
                 {
                     Console.WriteLine("Número da conta inválido!!!!!");
-                    return;
-                }
-
+                }     
+            }
+            
+            while (true)
+            {
                 Console.WriteLine("Digite o valor do Saque: ");
-                if(double.TryParse(Console.ReadLine(), out double valor_saque))
+                if(double.TryParse(Console.ReadLine(), out double valorSaque))
                 {
-                    entrada_saque = valor_saque;
+                    entradaSaque = valorSaque;
+                    break;
                 }
                 else
                 {
                     Console.WriteLine("Valor saque inválido!!!!!");
-                     return;
                 }
+            }
 
-                 lista_contas[entrada_conta].Sacar(entrada_saque);
-
+            listContas[entradaConta].Sacar(entradaSaque);
         }
            
         private static void ListarContas()
         {
             Console.WriteLine("Listar contas");
 
-            if(lista_contas.Count == 0)
+            if(listContas.Count == 0)
             {
                 Console.WriteLine("Nenhuma conta cadastrada.");
                 return;
             }
             
             int contador = 0;
-            foreach (var item in lista_contas)
+            foreach (var item in listContas)
             {
                 Console.Write("#{0} - ", contador);
                 Console.Write(item.ToString());
@@ -154,79 +211,65 @@ namespace dio_Bank
 
         private static void InserirConta()
         {   
-            bool[] validador = new bool[]{false,false,false,false};
-            string entrada_nome = "";
-            int entrada_tipo_conta = 0;
-            double entrada_saldo = 0.0, entrada_credito = 0.0;
+            string entradaNome = "";
+            int entradaTipoConta = 0;
+            double entradaSaldo = 0.0, entradaCredito = 0.0;
             
             Console.WriteLine("Inserir nova conta");
-
-            while ((validador[0] 
-                    && validador[1] 
-                        && validador[2] 
-                            && validador[3]) == false)    
+        
+            while (true)
             {
-                if(!validador[0])
-                { 
-                    Console.WriteLine("Digite 1 para Conta Física ou 2 para Jurídica: ");
+                Console.WriteLine("Digite 1 para Conta Física ou 2 para Jurídica: ");
 
-                    if(int.TryParse(Console.ReadLine(), out int tipo_conta) 
-                        && (tipo_conta == 1 || tipo_conta == 2))
-                    {
-                        entrada_tipo_conta = tipo_conta;
-                        validador[0] = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Tipo de conta inválido!!!!!");
-                    }
-                }
-
-                if(validador[0] && !validador[1])
+                if(int.TryParse(Console.ReadLine(), out int tipoConta) 
+                    && (tipoConta == 1 || tipoConta == 2))
                 {
-                    Console.WriteLine("Digite o nome do Cliente: ");
-                    entrada_nome = Console.ReadLine();
-                    validador[1] = true;
+                    entradaTipoConta = tipoConta;
+                    break;
                 }
-
-                if(validador[0] && validador[1] && !validador[2])
+                else
                 {
-                    Console.WriteLine("Digite o saldo inicial: ");
-
-                    if(double.TryParse(Console.ReadLine(), out double saldo))
-                    {
-                        entrada_saldo = saldo;
-                        validador[2] = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Saldo inválido!!!!!");
-                    }
-                    
-                }
-
-                if(validador[0] && validador[1] && validador[2] && !validador[3])
-                {
-                    Console.WriteLine("Digite o crédito: ");
-                    if(double.TryParse(Console.ReadLine(), out double credito))
-                    {
-                        entrada_credito = credito;
-                        validador[3] = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Crédito inválido!!!!!");
-                    }
+                    Console.WriteLine("Tipo de conta inválido!!!!!");
                 }
             }
-            
-            Conta novaConta = new Conta(_tipo_conta: (TipoConta)entrada_tipo_conta,
-                                        _saldo: entrada_saldo,
-                                        _credito: entrada_credito,
-                                        _nome: entrada_nome);
 
-            lista_contas.Add(novaConta);
+            Console.WriteLine("Digite o nome do Cliente: ");
+            entradaNome = Console.ReadLine();
 
+            while (true)
+            {
+                Console.WriteLine("Digite o saldo inicial: ");
+                if(double.TryParse(Console.ReadLine(), out double saldo))
+                {
+                    entradaSaldo = saldo;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Saldo inválido!!!!!");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Digite o crédito: ");
+                if(double.TryParse(Console.ReadLine(), out double credito))
+                {
+                    entradaCredito = credito;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Crédito inválido!!!!!");
+                }
+            }
+                    
+            Conta novaConta = new Conta(tipoConta: (TipoConta)entradaTipoConta,
+                                        saldo: entradaSaldo,
+                                        credito: entradaCredito,
+                                        nome: entradaNome);
+
+            listContas.Add(novaConta);
         }
 
         private static String ObterOpcaoUsuario()
@@ -243,10 +286,10 @@ namespace dio_Bank
             str.Append("X - Sair" + Environment.NewLine);
 
             Console.WriteLine(str);
-            string opcao_usuario = Console.ReadLine().ToUpper();
+            string opcaoUsuario = Console.ReadLine().ToUpper();
             Console.WriteLine();
 
-            return opcao_usuario;
+            return opcaoUsuario;
         }
     }
 }

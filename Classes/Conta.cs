@@ -5,53 +5,53 @@ namespace dio_Bank
 {
     public class Conta
     {
-        private TipoConta _tipo_conta {get; set;}
-        private double _saldo {get; set;}
-        private double _credito {get; set;}
-        private string _nome {get; set;}
+        private TipoConta tipoConta {get; set;}
+        private double saldo {get; set;}
+        private double credito {get; set;}
+        private string nome {get; set;}
     
-        public Conta(TipoConta _tipo_conta, double _saldo, double _credito, string _nome) 
+        public Conta(TipoConta tipoConta, double saldo, double credito, string nome) 
         {
-            this._tipo_conta = _tipo_conta;
-            this._saldo = _saldo;
-            this._credito = _credito;
-            this._nome = _nome;
+            this.tipoConta = tipoConta;
+            this.saldo = saldo;
+            this.credito = credito;
+            this.nome = nome;
         }
 
-        public bool Sacar(double valor_saque)
+        public bool Sacar(double valorSaque)
         {
-    	    if (this._saldo - valor_saque < this._credito *-1)
+    	    if (this.saldo - valorSaque < this.credito *-1)
             {
                Console.WriteLine("Saldo insuficiente");
                return false;
             }
 
-            this._saldo -= valor_saque;
+           this.saldo -= valorSaque;
 
-            Console.WriteLine($"Saldo atual da conta de {this._nome} é {this._saldo}");
+            Console.WriteLine($"Saldo atual da conta de {this.nome} é {this.saldo}");
             return true;
         }
 
-        public void Depositar(double valor_deposito)
+        public void Depositar(double valorDeposito)
         {
-            this._saldo += valor_deposito;
+            this.saldo += valorDeposito;
 
-            Console.WriteLine($"Saldo atual da conta de {this._nome} é {this._saldo}");
+            Console.WriteLine($"Saldo atual da conta de {this.nome} é {this.saldo}");
         }
 
-        public void Transferir(double valor_transferencia, Conta conta_destino)
+        public void Transferir(double valorTransferencia, Conta contaDestino)
         {
-           if (this.Sacar(valor_transferencia))
-                conta_destino.Depositar(valor_transferencia);
+           if (this.Sacar(valorTransferencia))
+                contaDestino.Depositar(valorTransferencia);
         }
 
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.Append("TipoConta " + this._tipo_conta + " | ");
-            str.Append("Nome " + this._nome + " | ");
-            str.Append("Saldo " + this._saldo + " | ");
-            str.Append("Crédito " + this._credito );
+            str.Append("TipoConta " + this.tipoConta + " | ");
+            str.Append("Nome " + this.nome + " | ");
+            str.Append("Saldo " + this.saldo + " | ");
+            str.Append("Crédito " + this.credito );
 
             return str.ToString();
         }
